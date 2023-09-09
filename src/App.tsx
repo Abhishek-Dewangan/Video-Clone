@@ -4,10 +4,12 @@ import './App.css';
 import HomePage from './Pages/HomePage';
 import { Routes, Route } from 'react-router-dom';
 import VideoDetailsPage from './Pages/VideoDetailsPage';
+import Navbar from './Components/Navbar';
 
 function App() {
   return (
     <div className='App'>
+      <Navbar />
       <Routes>
         <Route
           path='/'
