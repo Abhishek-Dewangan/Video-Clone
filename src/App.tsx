@@ -16,7 +16,7 @@ function App() {
           element={<HomePage />}
         />
         <Route
-          path='/videodetails'
+          path='/videodetails/:postid'
           element={<VideoDetailsPage />}
         />
       </Routes>

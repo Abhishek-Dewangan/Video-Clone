@@ -1,16 +1,17 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import VideoThumbnail from '../Components/VideoThumbnail';
 
 const HomePage = () => {
   const [data, setData] = useState([]);
   const [page, setPage] = useState<number>(0);
   const [nextButoon, setNextButton] = useState(false);
-  const [modelOpen, setModelOpen] = useState(false);
+
   const fetchData = () => {
     fetch(`https://internship-service.onrender.com/videos?page=${page}`)
       .then((res) => res.json())
       .then((res) => {
         console.log(res.data.posts);
+        localStorage.setItem('data', JSON.stringify(res.data.posts));
         setData(res.data.posts);
       })
       .catch((error) => console.log(error));
@@ -24,6 +25,7 @@ const HomePage = () => {
       })
       .catch((error) => console.log(error));
   };
+
   const handlePreviousPage = () => {
     if (page > 0) {
       setPage(page - 1);
@@ -34,34 +36,23 @@ const HomePage = () => {
     setPage(page + 1);
   };
 
-  const openModal = () => {
-    setModelOpen(true);
-  };
-
-  const closeModal = () => {
-    setModelOpen(false);
-  };
-
   useEffect(() => fetchData(), [page]);
+
   return (
     <div>
-      <div className='grid grid-cols-3 gap-4'>
+      <div className='grid grid-cols-4 gap-5 justify-center w-4/5 border-solid p-2 mx-auto my-3 min-h-screen'>
         {data.length ? (
-          data.map((elem) => {
+          data.map((elem: any) => {
             return (
-              <VideoThumbnail
-                elem={elem}
-                openModal={openModal}
-                closeModal={closeModal}
-                modelOpen={modelOpen}
-              />
+              <div key={elem.postid}>
+                <VideoThumbnail elem={elem} />
+              </div>
             );
           })
         ) : (
-          <div>No data</div>
+          <h1 className='text-2xl justify-self-center'>Loading...</h1>
         )}
       </div>
-
       <div className='my-4'>
         <button
           onClick={handlePreviousPage}

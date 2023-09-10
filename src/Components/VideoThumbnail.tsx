@@ -1,5 +1,5 @@
 import React from 'react';
-import VideoPlayer from './VideoPlayer';
+import { useNavigate } from 'react-router-dom';
 
 type Thumbnail = {
   elem: {
@@ -12,29 +12,20 @@ type Thumbnail = {
       thumbnail: string;
     };
   };
-  openModal: () => void;
-  closeModal: () => void;
-  modelOpen: boolean;
 };
 
-const VideoThumbnail: React.FC<Thumbnail> = ({
-  elem,
-  openModal,
-  closeModal,
-  modelOpen,
-}) => {
+const VideoThumbnail: React.FC<Thumbnail> = ({ elem }) => {
+  const navigate = useNavigate();
+  const playVideo = (elem: any) => {
+    navigate(`/videodetails/${elem.postId}`);
+  };
   return (
     <div
-      onClick={openModal}
+      onClick={() => playVideo(elem)}
       key={elem.creator.id}
-      className='relative aspect-w-1/2 aspect-h-1/2'>
-      <VideoPlayer
-        isOpen={modelOpen}
-        onClose={closeModal}
-        videoUrl={elem.submission.mediaUrl}
-      />
+      className='relative'>
       <img
-        className='object-cover w-full h-full'
+        className='w-200 h-300'
         src={elem.submission.thumbnail}
         alt={elem.creator.name}
       />
