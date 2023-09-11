@@ -40,7 +40,7 @@ const HomePage = () => {
 
   return (
     <div>
-      <div className='grid grid-cols-4 gap-5 justify-center w-4/5 border-solid p-2 mx-auto my-3 min-h-screen'>
+      <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10 w-4/5 border-solid p-2 mx-auto my-3 min-h-screen'>
         {data.length ? (
           data.map((elem: any) => {
             return (

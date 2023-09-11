@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import ReactPlayer from 'react-player';
 import { GrLinkNext, GrLinkPrevious } from 'react-icons/gr';
@@ -9,6 +9,12 @@ const VideoDetailsPage = () => {
   const postData = data ? JSON.parse(data) : [];
   const videoUrl = postData.map((elem: any) => elem.postId);
   const index = videoUrl.indexOf(postid);
+
+  const iconStyle: React.CSSProperties = {
+    background: 'white',
+    fontSize: '30px',
+    borderRadius: '50px',
+  };
 
   const [currentVideoIndex, setCurrentVideoIndex] = useState<number>(index);
 
@@ -32,11 +38,10 @@ const VideoDetailsPage = () => {
 
   return (
     <div>
+      <p>{postData[currentVideoIndex].creator.name}</p>
       <div className='controls flex justify-center gap-10'>
-        <button
-          onClick={handlePrevVideo}
-          className=''>
-          <GrLinkPrevious size={30}/>
+        <button onClick={handlePrevVideo}>
+          <GrLinkPrevious style={iconStyle} />
         </button>
         <div className='flex justify-center'>
           <ReactPlayer
@@ -49,12 +54,13 @@ const VideoDetailsPage = () => {
             onEnded={handleNextVideo}
           />
         </div>
-        <button
-          onClick={handleNextVideo}
-          className=''>
-          <GrLinkNext size={30}/>
+        <button onClick={handleNextVideo}>
+          <GrLinkNext style={iconStyle} />
         </button>
       </div>
+      <p className='w-80 mx-auto justifyfy'>
+        {postData[currentVideoIndex].submission.description}
+      </p>
     </div>
   );
 };

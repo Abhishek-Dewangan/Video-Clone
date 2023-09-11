@@ -5,10 +5,10 @@ const Navbar = () => {
   return (
     <nav className='p-2'>
       <div className='container mx-auto flex flex-col items-center'>
-        <Link to='/' className='text-4xl font-extrabold text-Black'>
+        <Link to='/' className='text-4xl font-extrabold text-white'>
           Video Clone
         </Link>
-        <p className='text-gray-700 text-lg mt-1'>Explore Trending Videos</p>
+        <p className='text-gray-400 text-lg mt-1'>Explore Trending Videos</p>
       </div>
     </nav>
   );
